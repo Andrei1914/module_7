@@ -1,11 +1,13 @@
 def custom_write(file_name, strings):
-    with open(file_name, 'r+', encoding='utf-8') as file:
-        for i, j in enumerate(strings):
-            strings_positions = []
-            strings_positions.append(i)
-            strings_positions.append(file.tell())
-            file.write(f'{i}\n')
-            print(f'{strings_positions}, {j}')
+    strings_positions = {}
+    number = 1
+    with open(file_name, 'w', encoding='utf-8') as file:
+        for string in strings:
+            strings_positions[(number, file.tell())] = string
+            file.write(string + '\n')
+            number += 1
+
+    return strings_positions
 
 
 info = [
